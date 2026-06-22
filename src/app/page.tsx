@@ -1,28 +1,25 @@
-'use client';
-
-import { useReveal } from '@/lib/useReveal';
-import Header from '@/components/Header';
-import Hero from '@/components/Hero';
-import QuemSomos from '@/components/QuemSomos';
-import Servicos from '@/components/Servicos';
-import PorQue from '@/components/PorQue';
-import Contratar from '@/components/Contratar';
-import TrabalharConvite from '@/components/TrabalharConvite';
-import Footer from '@/components/Footer';
+import Footer from '@/components/layout/Footer';
+import Header from '@/components/layout/Header';
+import RevealController from '@/components/layout/RevealController';
+import AboutSection from '@/components/sections/AboutSection';
+import CareersInvitationSection from '@/components/sections/CareersInvitationSection';
+import HeroSection from '@/components/sections/HeroSection';
+import ServiceRequestSection from '@/components/sections/ServiceRequestSection';
+import ServicesSection from '@/components/sections/ServicesSection';
+import WhyChooseUsSection from '@/components/sections/WhyChooseUsSection';
 
 export default function HomePage() {
-  useReveal();
-
   return (
     <>
+      <RevealController />
       <Header />
       <main>
-        <Hero />
-        <QuemSomos />
-        <Servicos />
-        <PorQue />
-        <Contratar />
-        <TrabalharConvite />
+        <HeroSection />
+        <AboutSection />
+        <ServicesSection />
+        <WhyChooseUsSection />
+        <ServiceRequestSection />
+        <CareersInvitationSection />
       </main>
       <Footer />
     </>

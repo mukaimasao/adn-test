@@ -26,7 +26,7 @@ const dancingScript = Dancing_Script({
 export const metadata: Metadata = {
   title: 'ADN Titres-Services — La confiance à domicile',
   description:
-    'Serviços domésticos confiáveis. Empresa agréée titres-services. Cuidamos do seu lar com confiança, carinho e profissionalismo.',
+    'ADN Titres-Services organise vos prestations avec proximité, confiance et professionnalisme.',
 };
 
 export default function RootLayout({
