@@ -13,7 +13,7 @@ export default function HeroSection() {
       <div className="container">
         <div className="relative z-[2] grid grid-cols-1 items-center gap-[clamp(36px,5vw,60px)] pb-[clamp(70px,9vw,130px)] pt-[clamp(44px,7vw,90px)] min-[860px]:grid-cols-[1.06fr_.94fr]">
           {/* TEXT */}
-          <div className="reveal min-w-0">
+          <div className="reveal order-2 min-w-0 min-[860px]:order-1">
             <span className="eyebrow eyebrow--rule">
               <Icon name="leaf" size={16} /> Votre agence titres-services
             </span>
@@ -40,9 +40,9 @@ export default function HeroSection() {
           </div>
 
           {/* MEDIA */}
-          <div className="reveal relative">
+          <div className="reveal relative order-1 min-[860px]:order-2">
             <div className="aspect-[4/4.5] w-full overflow-hidden rounded-[var(--r-img)] rounded-t-[120px_60px] shadow-[var(--sh-img)]">
-              <Photo label="famille accompagnée par une aide-ménagère" />
+              <Photo src="/images/1.png" alt="Famille accompagnée par une aide-ménagère" />
             </div>
           </div>
         </div>

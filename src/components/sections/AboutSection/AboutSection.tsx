@@ -9,9 +9,9 @@ export default function AboutSection() {
     <section className="section relative" id="a-propos">
       <div className="container">
         <div className="grid grid-cols-1 items-center gap-[clamp(36px,5vw,68px)] min-[880px]:grid-cols-[.9fr_1.1fr]">
-          <div className="reveal relative">
+          <div className="reveal relative hidden min-[880px]:block">
             <div className="aspect-[4/4.5] overflow-hidden rounded-[var(--r-img)] rounded-br-[110px_56px] shadow-[var(--sh-img)]">
-              <Photo label="équipe ADN dans un intérieur accueillant" />
+              <Photo src="/images/2.png" alt="Équipe ADN dans un intérieur accueillant" />
             </div>
           </div>
 
