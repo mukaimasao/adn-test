@@ -29,7 +29,7 @@ export default function Footer() {
               width={120}
               className="h-[46px] w-auto rounded-[var(--r-sm)] bg-white px-3 py-[9px]"
             />
-            <div className="mt-4 font-[var(--font-script)] text-[25px] text-[var(--verde-claro)]">La confiance à domicile</div>
+            <div className="mt-4 script text-[25px] text-[var(--verde-claro)]">La confiance à domicile</div>
             <p className="mt-3 max-w-[40ch] text-[14.5px] text-[#bfe0c8]">
               Un accompagnement de proximité, organisé dans le cadre des titres-services.
             </p>
@@ -87,9 +87,19 @@ export default function Footer() {
       </div>
 
       <div className="container">
-        <div className="relative z-[1] flex flex-col items-center gap-2.5 border-t border-white/15 py-[22px] text-center text-[13px] text-[#bfe0c8] min-[820px]:flex-row min-[820px]:justify-between min-[820px]:text-left">
-          <span>© {new Date().getFullYear()} ADN Titres-Services. Tous droits réservés.</span>
-          <span style={{ fontFamily: 'var(--font-script)', fontSize: 17, color: 'var(--verde-claro)' }}>
+        <div className="relative z-[1] flex flex-col gap-3 border-t border-white/15 py-[22px] text-center text-[13px] text-[#bfe0c8] min-[820px]:flex-row min-[820px]:items-center min-[820px]:justify-between min-[820px]:text-left">
+          <div className="flex flex-col gap-1">
+            <span>
+              © {new Date().getFullYear()} ADN Titres-Services. Tous droits réservés.
+            </span>
+
+            <span className="text-[11px] text-[#a9cdb3]">
+              Certaines images présentées sur ce site ont été générées à l’aide de
+              l’intelligence artificielle.
+            </span>
+          </div>
+
+          <span className="script text-[17px] text-[var(--verde-claro)]">
             La confiance à domicile
           </span>
         </div>
