@@ -10,23 +10,27 @@ interface FieldProps {
   id?: string;
   label?: string;
   required?: boolean;
+  optional?: boolean;
   error?: string;
   full?: boolean;
   help?: string;
   children: React.ReactNode;
 }
 
-export function Field({ id, label, required, error, full, help, children }: FieldProps) {
+export function Field({ id, label, required, optional, error, full, help, children }: FieldProps) {
   return (
     <div className={`field${error ? ' invalid' : ''}${full ? ' ffull' : ''}`}>
       {label && (
         <label htmlFor={id}>
-          {label}
-          {required && (
-            <span className="req" title="Champ obligatoire" aria-label="champ obligatoire">
-              *
-            </span>
-          )}
+          <span>
+            {label}
+            {required && (
+              <span className="req" title="Champ obligatoire" aria-label="champ obligatoire">
+                *
+              </span>
+            )}
+          </span>
+          {optional && <span className="optional">Facultatif</span>}
         </label>
       )}
       {children}
@@ -49,6 +53,7 @@ interface TextInputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement
   onChange: (v: string) => void;
   error?: string;
   full?: boolean;
+  optional?: boolean;
   help?: string;
 }
 
@@ -62,6 +67,7 @@ export function TextInput({
   required,
   error,
   full,
+  optional,
   help,
   autoComplete,
   inputMode,
@@ -69,7 +75,7 @@ export function TextInput({
   ...inputProps
 }: TextInputProps) {
   return (
-    <Field id={id} label={label} required={required} error={error} full={full} help={help}>
+    <Field id={id} label={label} required={required} optional={optional} error={error} full={full} help={help}>
       <input
         id={id}
         name={id}
@@ -97,6 +103,7 @@ interface TextareaProps extends Omit<React.TextareaHTMLAttributes<HTMLTextAreaEl
   onChange: (v: string) => void;
   error?: string;
   full?: boolean;
+  optional?: boolean;
   help?: string;
 }
 
@@ -109,13 +116,14 @@ export function Textarea({
   required,
   error,
   full = true,
+  optional,
   help,
   rows = 4,
   className,
   ...textareaProps
 }: TextareaProps) {
   return (
-    <Field id={id} label={label} required={required} error={error} full={full} help={help}>
+    <Field id={id} label={label} required={required} optional={optional} error={error} full={full} help={help}>
       <textarea
         id={id}
         name={id}
@@ -129,6 +137,68 @@ export function Textarea({
         onChange={(e) => onChange(e.target.value)}
         {...textareaProps}
       />
+    </Field>
+  );
+}
+
+/* ---- Select ---- */
+interface SelectOption {
+  value: string;
+  label: string;
+}
+
+interface SelectProps {
+  id: string;
+  label?: string;
+  value: string;
+  onChange: (v: string) => void;
+  options: SelectOption[];
+  placeholder?: string;
+  required?: boolean;
+  optional?: boolean;
+  error?: string;
+  full?: boolean;
+  help?: string;
+}
+
+export function Select({
+  id,
+  label,
+  value,
+  onChange,
+  options,
+  placeholder = 'Choisissez une option',
+  required,
+  optional,
+  error,
+  full,
+  help,
+}: SelectProps) {
+  return (
+    <Field id={id} label={label} required={required} optional={optional} error={error} full={full} help={help}>
+      <div className="select-wrap">
+        <select
+          id={id}
+          name={id}
+          className="input select"
+          value={value}
+          required={required}
+          aria-invalid={!!error}
+          aria-required={!!required}
+          aria-describedby={error ? `${id}-error` : help ? `${id}-help` : undefined}
+          onChange={(e) => onChange(e.target.value)}
+        >
+          <option value="" disabled hidden>
+            {placeholder}
+          </option>
+          {options.map((o) => (
+            <option key={o.value} value={o.value}>
+              {o.label}
+            </option>
+          ))}
+        </select>
+        <Icon name="chevronDown" size={18} />
+      </div>
     </Field>
   );
 }
@@ -177,7 +247,7 @@ export function ChoiceGroup({
 
   return (
     <div
-      className={`choices${columns === 2 ? ' choices--2' : ''}`}
+      className={`choices${columns === 2 ? ' choices--2' : ''}${columns === 3 ? ' choices--3' : ''}`}
       role={type === 'radio' ? 'radiogroup' : 'group'}
       aria-describedby={ariaDescribedBy}
       aria-invalid={invalid || undefined}
@@ -261,6 +331,45 @@ export function Upload({
           <span>{file ? 'Cliquez pour remplacer le fichier' : hint}</span>
         </span>
       </div>
+    </div>
+  );
+}
+
+/* ---- Checkbox ---- */
+interface CheckboxProps {
+  id: string;
+  checked: boolean;
+  onChange: (v: boolean) => void;
+  required?: boolean;
+  error?: string;
+  children: React.ReactNode;
+}
+
+export function Checkbox({ id, checked, onChange, required, error, children }: CheckboxProps) {
+  return (
+    <div className={`field${error ? ' invalid' : ''}`}>
+      <label htmlFor={id} className="consent">
+        <input
+          id={id}
+          name={id}
+          type="checkbox"
+          checked={checked}
+          onChange={(e) => onChange(e.target.checked)}
+          aria-invalid={!!error}
+          aria-required={!!required}
+          aria-describedby={error ? `${id}-error` : undefined}
+        />
+        <span className="consent__tick">
+          <Icon name="check" size={13} stroke={3} />
+        </span>
+        <span className="consent__label">{children}</span>
+      </label>
+      {error && (
+        <span className="err" id={`${id}-error`} role="alert">
+          <Icon name="alert" size={14} />
+          {error}
+        </span>
+      )}
     </div>
   );
 }

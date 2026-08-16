@@ -13,7 +13,7 @@ export default function Header({ base = '' }: HeaderProps) {
       <div className="container">
         <div className="flex h-[78px] items-center gap-[18px]">
           <a href={base || '/'} className="flex shrink-0 items-center" aria-label="ADN Titres-Services — accueil">
-            <Image src="/images/logo.png" alt="ADN Titres-Services" height={46} width={120} style={{ height: 46, width: 'auto' }} />
+            <Image src="/images/logo.jpeg" alt="ADN Titres-Services" height={46} width={120} style={{ height: 46, width: 'auto' }} />
           </a>
           <nav className="ml-[22px] hidden items-center gap-[26px] min-[900px]:flex" aria-label="Navigation principale">
             {NAVIGATION_ITEMS.map((item) => (
@@ -21,8 +21,8 @@ export default function Header({ base = '' }: HeaderProps) {
             ))}
           </nav>
           <div data-header-actions className="ml-auto hidden items-center gap-3 min-[1440px]:flex">
-            <Button variant="ghost" href="/careers" icon="briefcase">Rejoindre notre équipe</Button>
-            <Button variant="primary" href={base + '#intervention'} iconRight="arrow">Demander une intervention</Button>
+            <Button variant="ghost" href="/careers" icon="briefcase">Le postule équipe</Button>
+            <Button variant="primary" href={base + '#intervention'} iconRight="arrow">Je deviens client</Button>
           </div>
           <MobileNavigation base={base} />
         </div>

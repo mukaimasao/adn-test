@@ -3,8 +3,8 @@
 import { useState, type FormEvent } from 'react';
 import Button from '@/components/ui/Button';
 import Icon from '@/components/ui/Icon';
-import { ChoiceGroup, FormSuccess, Textarea, TextInput } from '@/components/ui/FormControls';
-import { INITIAL_SERVICE_REQUEST, SERVICE_OPTIONS } from './ServiceRequestForm.data';
+import { ChoiceGroup, Checkbox, FormSuccess, Textarea, TextInput } from '@/components/ui/FormControls';
+import { DAY_OPTIONS, INITIAL_SERVICE_REQUEST } from './ServiceRequestForm.data';
 import type { ServiceRequestErrors, ServiceRequestValues } from './ServiceRequestForm.types';
 import { validateServiceRequest } from './ServiceRequestForm.validation';
 
@@ -13,12 +13,10 @@ export default function ServiceRequestForm() {
   const [errors, setErrors] = useState<ServiceRequestErrors>({});
   const [sent, setSent] = useState(false);
 
-  const setValue = (key: keyof ServiceRequestValues) => (value: string | string[]) => {
+  const setValue = (key: keyof ServiceRequestValues) => (value: string | string[] | boolean) => {
     setValues((current) => ({ ...current, [key]: value }));
     setErrors((current) => ({ ...current, [key]: undefined }));
   };
-
-  const wantsOther = values.services.includes('autre');
 
   const submit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -45,9 +43,9 @@ export default function ServiceRequestForm() {
 
   if (sent) {
     return (
-      <div className="form-card reveal" aria-live="polite">
+      <div className="form-card reveal" role="status" aria-live="polite">
         <FormSuccess title="Votre demande a bien été enregistrée." onReset={reset}>
-          Merci, {values.fullName.split(' ')[0]} ! Notre
+          Merci, {values.firstName} ! Notre
           équipe vous contactera afin d’organiser la prestation.
         </FormSuccess>
       </div>
@@ -58,20 +56,61 @@ export default function ServiceRequestForm() {
     <div className="form-card reveal">
       <form onSubmit={submit} noValidate>
         <div className="fgroup">
-          <div className="fgroup__title">
+          <h3 className="fgroup__title">
             <span className="n">01</span> Coordonnées
-          </div>
+          </h3>
           <div className="fgrid fgrid--2">
             <TextInput
-              id="fullName"
-              label="Nom complet"
-              placeholder="Votre nom"
-              value={values.fullName}
-              onChange={setValue('fullName') as (value: string) => void}
+              id="firstName"
+              label="Prénom"
+              placeholder="Votre prénom"
+              value={values.firstName}
+              onChange={setValue('firstName') as (value: string) => void}
               required
-              error={errors.fullName}
+              error={errors.firstName}
+              autoComplete="given-name"
+            />
+            <TextInput
+              id="lastName"
+              label="Nom de famille"
+              placeholder="Votre nom de famille"
+              value={values.lastName}
+              onChange={setValue('lastName') as (value: string) => void}
+              required
+              error={errors.lastName}
+              autoComplete="family-name"
+            />
+            <TextInput
+              id="street"
+              label="Rue et numéro"
+              placeholder="Rue et numéro"
+              value={values.street}
+              onChange={setValue('street') as (value: string) => void}
+              required
+              error={errors.street}
               full
-              autoComplete="name"
+              autoComplete="street-address"
+            />
+            <TextInput
+              id="city"
+              label="Ville"
+              placeholder="Votre ville"
+              value={values.city}
+              onChange={setValue('city') as (value: string) => void}
+              required
+              error={errors.city}
+              autoComplete="address-level2"
+            />
+            <TextInput
+              id="postalCode"
+              label="Code postal"
+              placeholder="Code postal"
+              value={values.postalCode}
+              onChange={setValue('postalCode') as (value: string) => void}
+              required
+              error={errors.postalCode}
+              autoComplete="postal-code"
+              inputMode="numeric"
             />
             <TextInput
               id="email"
@@ -82,6 +121,7 @@ export default function ServiceRequestForm() {
               onChange={setValue('email') as (value: string) => void}
               required
               error={errors.email}
+              full
               autoComplete="email"
               inputMode="email"
             />
@@ -94,88 +134,82 @@ export default function ServiceRequestForm() {
               onChange={setValue('phone') as (value: string) => void}
               required
               error={errors.phone}
+              full
               autoComplete="tel"
               inputMode="tel"
             />
-            <TextInput
-              id="customerNumber"
-              label="Nº d’utilisateur titres-services"
-              placeholder="Si vous en avez déjà un"
-              value={values.customerNumber}
-              onChange={setValue('customerNumber') as (value: string) => void}
-              help="Laissez ce champ vide si vous n’en avez pas encore."
-            />
           </div>
         </div>
 
         <div className="fgroup">
-          <div className="fgroup__title">
-            <span className="n">02</span> Aide souhaitée
-          </div>
-          <div className={`field${errors.services ? ' invalid' : ''}`}>
-            <ChoiceGroup
-              type="checkbox"
-              name="services"
-              options={SERVICE_OPTIONS}
-              value={values.services}
-              onChange={setValue('services')}
-              columns={2}
-              ariaDescribedBy={errors.services ? 'services-error' : undefined}
-              invalid={Boolean(errors.services)}
-            />
-            {errors.services ? (
-              <span className="err" id="services-error" role="alert">
-                <Icon name="alert" size={14} /> {errors.services}
-              </span>
-            ) : (
-              <span className="help">Sélectionnez un ou plusieurs services.</span>
-            )}
-          </div>
-          <div
-            className={`field-reveal${wantsOther ? ' show' : ''}`}
-            style={{ marginTop: wantsOther ? 16 : 0 }}
-            aria-hidden={!wantsOther}
-          >
-            <div>
-              <Textarea
-                id="otherService"
-                label="Précisez le service souhaité"
-                placeholder="Décrivez brièvement votre besoin…"
-                value={values.otherService}
-                onChange={setValue('otherService') as (value: string) => void}
-                required={wantsOther}
-                error={wantsOther ? errors.otherService : undefined}
-                rows={3}
-              />
-            </div>
-          </div>
-        </div>
-
-        <div className="fgroup">
-          <div className="fgroup__title">
-            <span className="n">03</span> Informations complémentaires
-          </div>
+          <h3 className="fgroup__title">
+            <span className="n">02</span> Informations complémentaires
+          </h3>
           <div className="fgrid fgrid--2">
             <TextInput
-              id="locality"
-              label="Localité"
-              placeholder="Votre localité"
-              value={values.locality}
-              onChange={setValue('locality') as (value: string) => void}
-              autoComplete="address-level2"
+              id="pluxeeNumber"
+              label="Nº identifiant pluxee"
+              placeholder="Si vous en avez déjà un"
+              value={values.pluxeeNumber}
+              onChange={setValue('pluxeeNumber') as (value: string) => void}
+              optional
+              full
+              help="Laissez ce champ vide si vous n’en avez pas encore."
             />
+            <TextInput
+              id="hoursWanted"
+              label="Nombre d’heures souhaitées"
+              type="number"
+              min="0"
+              placeholder="Ex. : 4"
+              value={values.hoursWanted}
+              onChange={setValue('hoursWanted') as (value: string) => void}
+              optional
+              full
+              inputMode="numeric"
+            />
+            <div className="field ffull">
+              <label>
+                <span>Jours disponibles</span>
+                <span className="optional">Facultatif</span>
+              </label>
+              <ChoiceGroup
+                type="checkbox"
+                name="availableDays"
+                options={DAY_OPTIONS}
+                value={values.availableDays}
+                onChange={setValue('availableDays')}
+                columns={3}
+              />
+              <span className="help">Sélectionnez les jours qui vous conviennent.</span>
+            </div>
             <Textarea
-              id="message"
-              label="Message ou remarques"
-              placeholder="Décrivez vos besoins et vos disponibilités…"
-              value={values.message}
-              onChange={setValue('message') as (value: string) => void}
+              id="comment"
+              label="Commentaire"
+              placeholder="Des précisions à partager ?"
+              value={values.comment}
+              onChange={setValue('comment') as (value: string) => void}
+              optional
               full
             />
           </div>
         </div>
 
-        <Button type="submit" variant="primary" size="lg" block iconRight="arrow">
+        <Checkbox
+          id="privacyConsent"
+          checked={values.privacyConsent}
+          onChange={setValue('privacyConsent') as (value: boolean) => void}
+          required
+          error={errors.privacyConsent}
+        >
+          J’accepte la{' '}
+          <a href="/politique-de-confidentialite" target="_blank" rel="noopener noreferrer">
+            politique de confidentialité
+          </a>
+          . <span className="req" aria-label="champ obligatoire">*</span>
+        </Checkbox>
+
+        <Button type="submit" variant="primary" size="lg" block iconRight="arrow" className="mt-5">
           Envoyer ma demande
         </Button>
         <div className="microcopy" style={{ justifyContent: 'center', marginTop: 14 }}>

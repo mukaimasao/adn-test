@@ -1,16 +1,13 @@
 export interface CareerApplicationValues {
-  fullName: string;
-  birthDate: string;
-  phone: string;
+  hoursWanted: string;
+  firstName: string;
+  lastName: string;
   email: string;
-  address: string;
-  locality: string;
-  district: string;
-  experience: string;
-  experienceYears: string;
-  services: string[];
-  availability: string;
-  notes: string;
+  street: string;
+  city: string;
+  postalCode: string;
+  phone: string;
+  privacyConsent: boolean;
 }
 
 export type CareerApplicationErrors = Partial<Record<keyof CareerApplicationValues, string>>;
@@ -18,5 +15,4 @@ export type CareerApplicationErrors = Partial<Record<keyof CareerApplicationValu
 export interface CareerOption {
   value: string;
   label: string;
-  icon?: string;
 }

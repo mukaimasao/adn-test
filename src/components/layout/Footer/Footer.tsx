@@ -23,7 +23,7 @@ export default function Footer() {
           {/* Brand */}
           <div>
             <Image
-              src="/images/logo.png"
+              src="/images/logo.jpeg"
               alt="ADN Titres-Services"
               height={46}
               width={120}
@@ -45,7 +45,7 @@ export default function Footer() {
                 <Icon name="clock" size={18} />
                 <span>
                   <b className="block font-[var(--font-head)] text-sm font-semibold text-white">Du lundi au vendredi</b>
-                  <span className="text-[13px] text-[#a9cdb3]">De 8 h à 18 h</span>
+                  <span className="text-[13px] text-[#a9cdb3]">De 9 h à 15 h</span>
                 </span>
               </span>
             </div>
@@ -55,10 +55,10 @@ export default function Footer() {
           <div>
             <h4 className="mb-[18px] font-[var(--font-head)] text-[13px] font-semibold uppercase tracking-[.14em] text-white">Contact</h4>
             <div className="flex flex-col gap-[15px] [&_.contact-line]:flex [&_.contact-line]:items-start [&_.contact-line]:gap-3 [&_.contact-line]:text-[14.5px] [&_.contact-line]:text-[#cfe7d6] [&_.contact-line>svg]:mt-0.5 [&_.contact-line>svg]:shrink-0 [&_.contact-line>svg]:text-[var(--verde-claro)] [&_b]:block [&_b]:break-all [&_b]:font-[var(--font-head)] [&_b]:text-sm [&_b]:font-semibold [&_b]:text-white">
-              <a href="tel:+32486173577" className="contact-line transition-colors hover:text-[var(--dourado)]">
+              <a href="tel:+32497761736" className="contact-line transition-colors hover:text-[var(--dourado)]">
                 <Icon name="phone" size={18} />
                 <span>
-                  <b>+32 486 17 35 77</b>
+                  <b>+32 497 76 17 36</b>
                 </span>
               </a>
               <a href="mailto:noely_nogueira@hotmail.com" className="contact-line transition-colors hover:text-[var(--dourado)]">
@@ -67,20 +67,13 @@ export default function Footer() {
                   <b>noely_nogueira@hotmail.com</b>
                 </span>
               </a>
-              <span className="contact-line">
-                <Icon name="pin" size={18} />
+              <span className="contact-line" aria-disabled="true">
+                <Icon name="instagram" size={18} />
                 <span>
-                  <b>Adresse</b>
-                  <span>[Adresse à compléter]</span>
-                </span>
-              </span>
-              <a href="#" className="contact-line transition-colors hover:text-[var(--dourado)]">
-                <Icon name="facebook" size={18} />
-                <span>
-                  <b>Facebook</b>
+                  <b>Instagram</b>
                   <span>Bientôt disponible</span>
                 </span>
-              </a>
+              </span>
             </div>
           </div>
         </div>

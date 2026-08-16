@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { createPortal } from 'react-dom';
 import Image from 'next/image';
 import Button from '@/components/ui/Button';
@@ -14,11 +14,21 @@ interface MobileNavigationProps {
 export default function MobileNavigation({ base }: MobileNavigationProps) {
   const [open, setOpen] = useState(false);
   const [mounted, setMounted] = useState(false);
+  const triggerRef = useRef<HTMLButtonElement>(null);
+  const closeRef = useRef<HTMLButtonElement>(null);
+  const dialogWrapRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => setMounted(true), []);
 
   useEffect(() => {
     document.body.style.overflow = open ? 'hidden' : '';
+    // React 18 doesn't serialize the `inert` prop; set the DOM attribute directly.
+    dialogWrapRef.current?.toggleAttribute('inert', !open);
+    if (open) {
+      closeRef.current?.focus();
+    } else {
+      triggerRef.current?.focus();
+    }
     return () => {
       document.body.style.overflow = '';
     };
@@ -35,6 +45,7 @@ export default function MobileNavigation({ base }: MobileNavigationProps) {
   return (
     <>
       <button
+        ref={triggerRef}
         className="ml-auto grid h-12 w-12 place-items-center rounded-[var(--r-sm)] border border-[var(--linha-2)] bg-white text-[var(--verde-escuro)] transition-colors hover:border-[var(--verde-claro)] hover:bg-[var(--verde-wash)] min-[900px]:hidden"
         aria-label="Ouvrir le menu"
         aria-expanded={open}
@@ -51,16 +62,20 @@ export default function MobileNavigation({ base }: MobileNavigationProps) {
               onClick={() => setOpen(false)}
             />
             <div
+              ref={dialogWrapRef}
               className={`pointer-events-none fixed inset-0 z-[80] overflow-hidden ${open ? 'pointer-events-auto' : ''}`}
               aria-hidden={!open}
             >
               <aside
                 id="mobile-navigation"
+                role="dialog"
+                aria-modal="true"
+                aria-label="Menu de navigation"
                 className={`absolute right-0 top-0 flex h-full w-[min(86vw,360px)] flex-col bg-[var(--creme)] p-[22px] shadow-[-20px_0_60px_-24px_rgba(20,60,30,.4)] transition-transform duration-300 ${open ? 'translate-x-0' : 'translate-x-full'}`}
               >
                 <div className="mb-3 flex items-center justify-between">
-                  <Image src="/images/logo.png" alt="ADN Titres-Services" height={40} width={100} style={{ height: 40, width: 'auto' }} />
-                  <button className="grid h-11 w-11 place-items-center rounded-[var(--r-sm)] border border-[var(--linha-2)] bg-white text-[var(--grafite)]" aria-label="Fermer le menu" onClick={() => setOpen(false)}>
+                  <Image src="/images/logo.jpeg" alt="ADN Titres-Services" height={40} width={100} style={{ height: 40, width: 'auto' }} />
+                  <button ref={closeRef} className="grid h-11 w-11 place-items-center rounded-[var(--r-sm)] border border-[var(--linha-2)] bg-white text-[var(--grafite)]" aria-label="Fermer le menu" onClick={() => setOpen(false)}>
                     <Icon name="x" size={20} />
                   </button>
                 </div>
@@ -73,10 +88,10 @@ export default function MobileNavigation({ base }: MobileNavigationProps) {
                 </nav>
                 <div className="mt-auto flex flex-col gap-3 pt-4">
                   <Button variant="primary" size="lg" block href={base + '#intervention'} iconRight="arrow" onClick={() => setOpen(false)}>
-                    Demander une intervention
+                    Je deviens client
                   </Button>
                   <Button variant="ghost" size="lg" block href="/careers" icon="briefcase">
-                    Rejoindre notre équipe
+                    Le postule équipe
                   </Button>
                 </div>
               </aside>

@@ -8,7 +8,7 @@ export default function CareersInvitationSection() {
       <div className="container">
         <div className="grid grid-cols-1 items-end gap-[clamp(30px,4vw,52px)] min-[900px]:grid-cols-[.95fr_1.05fr]">
           <div className="reveal relative aspect-[4/3.2] overflow-hidden rounded-[var(--r-img)] rounded-tl-[100px_52px] shadow-[var(--sh-img)]">
-            <Photo src="/images/3.png" alt="Aide-ménagère souriante dans un cadre accueillant" />
+            <Photo src="/images/3.jpeg" alt="Aide-ménagère souriante dans un cadre accueillant" />
           </div>
           <div className="reveal min-w-0">
             <h2 className="mt-3.5 text-[clamp(28px,3.6vw,42px)] font-bold">

@@ -1,18 +1,21 @@
 export interface ServiceRequestValues {
-  fullName: string;
+  firstName: string;
+  lastName: string;
+  street: string;
+  city: string;
+  postalCode: string;
   email: string;
   phone: string;
-  customerNumber: string;
-  locality: string;
-  message: string;
-  services: string[];
-  otherService: string;
+  pluxeeNumber: string;
+  hoursWanted: string;
+  availableDays: string[];
+  comment: string;
+  privacyConsent: boolean;
 }
 
 export type ServiceRequestErrors = Partial<Record<keyof ServiceRequestValues, string>>;
 
-export interface ServiceOption {
+export interface DayOption {
   value: string;
   label: string;
-  icon: string;
 }

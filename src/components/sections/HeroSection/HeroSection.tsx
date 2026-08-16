@@ -31,18 +31,18 @@ export default function HeroSection() {
             </p>
             <div className="mt-8 flex flex-wrap gap-3.5 [&_.btn]:w-full sm:[&_.btn]:w-auto min-[860px]:[&_.btn]:shrink-0">
               <Button variant="primary" size="lg" href="#intervention" iconRight="arrow" className="whitespace-normal">
-                Demander une intervention
+                Je deviens client
               </Button>
               <Button variant="gold" size="lg" href="/careers" icon="briefcase" className="whitespace-normal">
-                Rejoindre notre équipe
+                Le postule équipe
               </Button>
             </div>
           </div>
 
           {/* MEDIA */}
           <div className="reveal relative order-1 min-[860px]:order-2">
-            <div className="aspect-[4/4.5] w-full overflow-hidden rounded-[var(--r-img)] rounded-t-[120px_60px] shadow-[var(--sh-img)]">
-              <Photo src="/images/1.png" alt="Famille accompagnée par une aide-ménagère" />
+            <div className="aspect-[4/3] w-full overflow-hidden rounded-[var(--r-img)] rounded-t-[120px_60px] shadow-[var(--sh-img)]">
+              <Photo src="/images/1.jpeg" alt="Famille accompagnée par une aide-ménagère" />
             </div>
           </div>
         </div>

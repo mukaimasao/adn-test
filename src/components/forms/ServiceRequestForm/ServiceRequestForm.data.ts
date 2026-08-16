@@ -1,21 +1,25 @@
-import type { ServiceOption, ServiceRequestValues } from './ServiceRequestForm.types';
+import type { DayOption, ServiceRequestValues } from './ServiceRequestForm.types';
 
-export const SERVICE_OPTIONS: ServiceOption[] = [
-  { value: 'nettoyage', label: 'Nettoyage du domicile', icon: 'shine' },
-  { value: 'repassage', label: 'Repassage', icon: 'hanger' },
-  { value: 'lessive', label: 'Lessive', icon: 'wash' },
-  { value: 'repas', label: 'Préparation des repas', icon: 'pot' },
-  { value: 'aide-reguliere', label: 'Aide-ménagère régulière', icon: 'homeCheck' },
-  { value: 'autre', label: 'Autre', icon: 'plus' },
+export const DAY_OPTIONS: DayOption[] = [
+  { value: 'lundi', label: 'Lundi' },
+  { value: 'mardi', label: 'Mardi' },
+  { value: 'mercredi', label: 'Mercredi' },
+  { value: 'jeudi', label: 'Jeudi' },
+  { value: 'vendredi', label: 'Vendredi' },
+  { value: 'samedi', label: 'Samedi' },
 ];
 
 export const INITIAL_SERVICE_REQUEST: ServiceRequestValues = {
-  fullName: '',
+  firstName: '',
+  lastName: '',
+  street: '',
+  city: '',
+  postalCode: '',
   email: '',
   phone: '',
-  customerNumber: '',
-  locality: '',
-  message: '',
-  services: [],
-  otherService: '',
+  pluxeeNumber: '',
+  hoursWanted: '',
+  availableDays: [],
+  comment: '',
+  privacyConsent: false,
 };

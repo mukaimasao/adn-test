@@ -1,34 +1,20 @@
 import type { CareerApplicationValues, CareerOption } from './CareerApplicationForm.types';
 
-export const CAREER_SERVICE_OPTIONS: CareerOption[] = [
-  { value: 'nettoyage', label: 'Nettoyage du domicile', icon: 'sparkles' },
-  { value: 'repassage', label: 'Repassage', icon: 'shirt' },
-  { value: 'repas', label: 'Préparation des repas', icon: 'utensils' },
-  { value: 'lessive', label: 'Lessive', icon: 'droplets' },
-];
-
-export const AVAILABILITY_OPTIONS: CareerOption[] = [
-  { value: 'temps-partiel', label: 'Temps partiel' },
-  { value: 'temps-plein', label: 'Temps plein' },
-  { value: 'flexible', label: 'Horaires flexibles' },
-];
-
-export const EXPERIENCE_OPTIONS: CareerOption[] = [
-  { value: 'oui', label: 'Oui' },
-  { value: 'non', label: 'Non' },
+export const HOURS_OPTIONS: CareerOption[] = [
+  { value: 'moins-19', label: 'moins de 19h' },
+  { value: '19-25', label: 'entre 19h et 25h' },
+  { value: '26-32', label: 'entre 26h et 32h' },
+  { value: 'plus-32', label: 'plus que 32h' },
 ];
 
 export const INITIAL_CAREER_APPLICATION: CareerApplicationValues = {
-  fullName: '',
-  birthDate: '',
-  phone: '',
+  hoursWanted: '',
+  firstName: '',
+  lastName: '',
   email: '',
-  address: '',
-  locality: '',
-  district: '',
-  experience: '',
-  experienceYears: '',
-  services: [],
-  availability: '',
-  notes: '',
+  street: '',
+  city: '',
+  postalCode: '',
+  phone: '',
+  privacyConsent: false,
 };

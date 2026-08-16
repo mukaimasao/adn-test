@@ -10,16 +10,16 @@ export default function ServiceRequestSection() {
           <div className="reveal min-w-0 min-[940px]:sticky min-[940px]:top-[100px] [&_.sec-head]:max-w-none">
             <SectionHeading
               eyebrow="Votre demande"
-              title="Demandez une"
-              accent="intervention"
+              title="Je deviens"
+              accent="client"
               sub="Indiquez-nous vos besoins et vos disponibilités. Notre équipe vous contactera afin d’organiser la prestation dans le cadre des titres-services."
             />
             <div className="mt-[30px] border-t border-[var(--linha)] pt-[26px]">
               <span className="script block text-[30px]">La confiance à domicile</span>
               <p className="mt-2 max-w-[34ch] text-[14.5px] text-[var(--texto-suave)]">Votre intérieur est accompagné avec attention et professionnalisme.</p>
             </div>
-            <a className="mt-[26px] inline-flex items-center gap-[11px] font-[var(--font-head)] text-base font-semibold text-[var(--verde-escuro)] [&_svg]:text-[var(--verde-medio)]" href="tel:+32486173577">
-              <Icon name="phone" size={20} /> +32 486 17 35 77
+            <a className="mt-[26px] inline-flex items-center gap-[11px] font-[var(--font-head)] text-base font-semibold text-[var(--verde-escuro)] [&_svg]:text-[var(--verde-medio)]" href="tel:+32497761736">
+              <Icon name="phone" size={20} /> +32 497 76 17 36
             </a>
           </div>
           <ServiceRequestForm />

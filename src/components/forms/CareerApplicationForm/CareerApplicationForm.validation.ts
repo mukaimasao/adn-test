@@ -10,15 +10,21 @@ export function validateCareerApplication(
 ): CareerApplicationErrors {
   const errors: CareerApplicationErrors = {};
 
-  if (!values.fullName.trim()) errors.fullName = 'Indiquez votre nom complet.';
+  if (!values.hoursWanted) errors.hoursWanted = 'Sélectionnez une option.';
+  if (!values.firstName.trim()) errors.firstName = 'Indiquez votre prénom.';
+  if (!values.lastName.trim()) errors.lastName = 'Indiquez votre nom de famille.';
+  if (!values.email.trim()) errors.email = 'Indiquez votre adresse e-mail.';
+  else if (!values.email.includes('@')) errors.email = 'Indiquez une adresse e-mail valide.';
+  if (!values.street.trim()) errors.street = 'Indiquez votre rue et numéro.';
+  if (!values.city.trim()) errors.city = 'Indiquez votre ville.';
+  if (!values.postalCode.trim()) errors.postalCode = 'Indiquez votre code postal.';
   if (!values.phone.trim()) errors.phone = 'Indiquez votre numéro de téléphone.';
   else if (!PHONE_PATTERN.test(values.phone)) {
     errors.phone = 'Utilisez un format de téléphone valide.';
   }
-  if (!values.email.trim()) errors.email = 'Indiquez votre adresse e-mail.';
-  else if (!values.email.includes('@')) errors.email = 'Indiquez une adresse e-mail valide.';
-  if (!values.experience) errors.experience = 'Sélectionnez une option.';
-  if (!values.availability) errors.availability = 'Sélectionnez vos disponibilités.';
+  if (!values.privacyConsent) {
+    errors.privacyConsent = 'Vous devez accepter la politique de confidentialité.';
+  }
 
   return errors;
 }
